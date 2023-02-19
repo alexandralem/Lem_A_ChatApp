@@ -9,6 +9,10 @@ function setUserID( {sID} ) {
     vm.socketID = sID;
 }
 
+function handleUserTyping(user) {
+  console.log('somebody is typing something');
+}
+
 function showNewMessage( {message} ) {
     vm.messages.push(message);
 }
@@ -34,6 +38,13 @@ const { createApp } = Vue;
             });
 
             this.message = "";
+        },
+
+        catchTextFocus() {
+          //emit a typing event and broadcast it to the server
+          socket.emit('user_typing', {
+            name: this.nickname || "anonymous"
+          })
         }
     },
 
@@ -45,3 +56,8 @@ const { createApp } = Vue;
 
   socket.addEventListener('connected', setUserID);
   socket.addEventListener('new_message', showNewMessage);
+  socket.addEventListener('typing', handleUserTyping);
+
+  socket.on('message', message => {
+    console.log(message);
+  });
