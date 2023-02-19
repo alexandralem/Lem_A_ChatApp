@@ -4,27 +4,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
-    <title>Chat</title>
+    <title>Login Page</title>
 </head>
 <body>
-    <h1>Chat App</h1>
+    <h1 class="hidden">Chat App</h1>
     <main id="app">
-        <section>
-            <input id="nickname" v-model="nickname" type="text" placeholder="Nickname">
+        <section class="login">
+            <div class="logobig">
+                <img src="images/babblelogo.svg" alt="">
+            </div>
+            <h2 class="intro">Log in and enjoy chatting with your friends!</h1>
             <form>
-                <label for="message">Something to say?</label>
-                <textarea @focus="catchTextFocus" v-model="message" id="textarea" class="message" autocomplete="off"></textarea>
-                <input @click.prevent="dispatchMessage" type="submit" value="Send">
-           
-             </form>
+                <input id="nickname" v-model="nickname" type="text" placeholder="Username...">
+                
+                <input type="submit" value="Submit">
+            </form>
         </section>
-        <section class="messages">
-            <ul id="messages">
-                <!--render a new message component for every message-->
-                <newmsg v-for="message in messages" :message="message"></newmsg>
-            </ul>
-        </section>
+
     </main>
 
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>

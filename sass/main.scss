@@ -3,46 +3,70 @@
 
 @import'./modules/chatmessage';
 
+.hidden {
+    display: none;
+}
+
 body {
     font-size: 16px;
-    background-color: #333;
     color: black;
 
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Lato', sans-serif;
+}
+
+.logobig img {
+    max-width: 100%;
+}
+
+.logobig {
+    margin-bottom: 2em;
 }
 
 main {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 1em;
+    height: 100vh;
 }
 
-main section { padding: 1em; }
+.login {
+    justify-self: center;
+    align-self: center;
+}
 
-#main-headline { text-align: center; margin-bottom: 0.8em; }
+#nickname {
+    display: block;
+    border: 1px solid black;
+    margin: auto;
+    margin-bottom: 1em;
+    width: 100%;
+    border-radius: 30px;
+    height: 40px;
+    padding: 1em;
+    font-style: italic;
+}
 
-label { display: block; padding-bottom: 0.5em;}
-
-textarea { width: 90%; height: 200px; }
 
 input[type="submit"] { 
     display: block; 
-    margin-top: 1em; 
-    padding: 8px 12px; 
-    border-radius: 0.5em; 
+    border-radius: 30px;
+    width: 100%;
+    margin: auto;
+
+    height: 40px;
+    background-color: #04ADED;
+    color: #fff;
 }
 
-.chat-messages {
-    width: 45%;
-    border-radius: 1em;
-    padding: 0.5em;
-    background-color: rgba(0, 150, 150, 0.8);
-    margin-bottom: 0.8em;
-    float: left;
-    clear: both;
+
+
+.intro {
+    text-align: center;
+    margin: auto;
+    width: 70%;
+    font-size: 1em;
+    font-weight: 300;
+    margin-bottom: 2em;
 }
 
-.other-messages {
-    background-color: rgba(220, 117, 27, 0.8);
-    float: right;
-}
+
+//Login Page
+
