@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 
 const http = require('http');
+
+const { userJoin, getCurrentUser, userLeave, getUsers } = require('./utils/users');
 const server = http.createServer(app);
 
 const { Server } = require("socket.io");
@@ -17,6 +19,9 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/views/index.html');
 });
 
+app.get('/chat', (req, res) => {
+  res.sendFile(__dirname + '/views/chat.html');
+});
 
 
 server.listen(port, () => {
@@ -30,12 +35,37 @@ io.on('connection', (socket) => {
   console.log('a user connected');
   socket.emit('connected', {sID: socket.id, message: 'new connection'});
 
+  socket.on('joinChat', ({username}) => {
+    const user = userJoin(socket.id, username);
+    if (user.username == null) {
+      return;
+    } else {
+      socket.broadcast.emit('message', `${user.username} has joined the chat`);
+    };
+
+    io.emit('allUsers', {
+      users: getUsers()
+    });
+    
+  })
   // Broadcast when a user connects
 
-  socket.broadcast.emit('message', 'A user has joined the chat');
+ 
 
   socket.on('disconnect', () => {
-    io.emit('message', 'A user has left the chat');
+    const user = userLeave(socket.id);
+    debugger;
+    if (user.username == null) {
+      return;
+    } else if(user) {
+      io.emit('message', `${user.username} has left the chat`);
+      io.emit('allUsers', {
+        users: getUsers()
+      });
+    }
+
+    
+    
   })
 
 

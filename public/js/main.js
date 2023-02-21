@@ -1,6 +1,16 @@
 //imports 
 import ChatMsg from './components/ChatMessage.js';
+import Desc from './components/Announcement.js';
 const socket = io();
+
+const queryString = window.location.search;
+
+const urlParams = new URLSearchParams(queryString);
+
+const username = urlParams.get('username');
+
+
+socket.emit('joinChat', {username});
 
 //utility functions for socket
 function setUserID( {sID} ) {
@@ -10,7 +20,7 @@ function setUserID( {sID} ) {
 }
 
 function handleUserTyping(user) {
-  console.log('somebody is typing something');
+  console.log(user.currentlytypinguser.name + ' is typing...');
 }
 
 function showNewMessage( {message} ) {
@@ -25,7 +35,8 @@ const { createApp } = Vue;
         socketID: '',
         message: '',
         messages: [],
-        nickname: ''
+        nickname: '',
+        text: ''
       }
     },
 
@@ -33,7 +44,7 @@ const { createApp } = Vue;
         dispatchMessage() {
             socket.emit('chat_message', {
                 content: this.message,
-                name: this.nickname || 'anonymous',
+                name: username || 'anonymous',
                 id: this.socketID
             });
 
@@ -43,14 +54,15 @@ const { createApp } = Vue;
         catchTextFocus() {
           //emit a typing event and broadcast it to the server
           socket.emit('user_typing', {
-            name: this.nickname || "anonymous"
+            name: username || "anonymous"
           })
         }
     },
 
 
     components: {
-        newmsg: ChatMsg
+        newmsg: ChatMsg,
+        newdesc: Desc
     }
   }).mount('#app')
 
@@ -60,4 +72,8 @@ const { createApp } = Vue;
 
   socket.on('message', message => {
     console.log(message);
+  });
+
+  socket.on('allUsers', ({users}) => {
+    console.log(users);
   });
