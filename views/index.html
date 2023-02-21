@@ -18,13 +18,14 @@
                 <img src="images/babblelogo.svg" alt="">
             </div>
             <h2 class="intro">Log in and enjoy chatting with your friends!</h1>
-            <form>
-                <input id="nickname" v-model="nickname" type="text" placeholder="Username...">
+            <form action="chat">
+                <input id="nickname" name="username" v-model="nickname" type="text" placeholder="Username..." required>
                 
-                <input type="submit" value="Submit">
+                <button type="submit" class="btn">Join Chat</button>
             </form>
         </section>
-
+        
+        
     </main>
 
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>

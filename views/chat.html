@@ -8,23 +8,63 @@
     <title>Chat</title>
 </head>
 <body>
-    <h1>Chat App</h1>
+    <h1 class="hidden">Chat App</h1>
     <main id="app">
         <section>
-            <input id="nickname" v-model="nickname" type="text" placeholder="Nickname">
+            <header class="head">
+                <div class="logo">
+                    <img src="images/babblelogo.svg" alt="logo">
+                </div>
+                <a href="/">
+                    <div action="/" class="leave-button">
+                        <p>Leave Chat</p>
+                    </div>
+                </a>
+                
+            </header>
+        </section>
+        <section class="content">
+            <div class="sidebar">
+                <h2 class="users">Users</h2>
+                <ul>
+                    <li>John</li>
+                    <li>Mary</li>
+                    <li>Harry</li>
+                </ul>
+            </div>
+            <div class="messages">
+                <ul id="messages">
+                    <!--render a new message component for every message-->
+                    <newmsg v-for="message in messages" :message="message"></newmsg>
+                    <newdesc v-for="desc in descs" :desc="desc"></newdesc>
+                    <!--
+                    <div class="othermessage">
+                        <h3>John</h3>
+                        <p>Hello</p>
+                    </div>
+                    <div class="mymessage">
+                        <h3>Me</h3>
+                        <p>Hello</p>
+                    </div>-->
+                </ul>
+            </div>
+        </section>
+        <section class="fields">
             <form>
-                <label for="message">Something to say?</label>
-                <textarea @focus="catchTextFocus" v-model="message" id="textarea" class="message" autocomplete="off"></textarea>
-                <input @click.prevent="dispatchMessage" type="submit" value="Send">
-           
-             </form>
+                <input
+                @focus="catchTextFocus" v-model="message" id="textarea" class="message" placeholder="Your Message..."
+                type="text"
+                required
+                autocomplete="off"
+                />
+
+                <button @click.prevent="dispatchMessage" type="text" class="send">
+                    <p>Send</p>
+                </button>
+            </form>
+                
         </section>
-        <section class="messages">
-            <ul id="messages">
-                <!--render a new message component for every message-->
-                <newmsg v-for="message in messages" :message="message"></newmsg>
-            </ul>
-        </section>
+
     </main>
 
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
