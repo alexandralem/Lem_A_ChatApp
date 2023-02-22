@@ -1,6 +1,6 @@
 //imports 
 import ChatMsg from './components/ChatMessage.js';
-import Desc from './components/Announcement.js';
+
 const socket = io();
 
 const queryString = window.location.search;
@@ -23,6 +23,13 @@ function handleUserTyping(user) {
   console.log(user.currentlytypinguser.name + ' is typing...');
 }
 
+function outputMessage(message) {
+  const div = document.createElement('div');
+  div.innerHTML = `<p>
+  ${message}</p>`;
+  document.querySelector('#messages').appendChild(div);
+}
+
 function showNewMessage( {message} ) {
     vm.messages.push(message);
 }
@@ -35,8 +42,7 @@ const { createApp } = Vue;
         socketID: '',
         message: '',
         messages: [],
-        nickname: '',
-        text: ''
+        nickname: ''
       }
     },
 
@@ -59,10 +65,8 @@ const { createApp } = Vue;
         }
     },
 
-
     components: {
-        newmsg: ChatMsg,
-        newdesc: Desc
+        newmsg: ChatMsg
     }
   }).mount('#app')
 
@@ -71,9 +75,10 @@ const { createApp } = Vue;
   socket.addEventListener('typing', handleUserTyping);
 
   socket.on('message', message => {
-    console.log(message);
+    outputMessage(message);
   });
 
   socket.on('allUsers', ({users}) => {
     console.log(users);
   });
+  

@@ -37,9 +37,7 @@ io.on('connection', (socket) => {
 
   socket.on('joinChat', ({username}) => {
     const user = userJoin(socket.id, username);
-    if (user.username == null) {
-      return;
-    } else {
+    if (user && user.username !== null) {
       socket.broadcast.emit('message', `${user.username} has joined the chat`);
     };
 
@@ -55,17 +53,16 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     const user = userLeave(socket.id);
     debugger;
-    if (user.username == null) {
-      return;
-    } else if(user) {
+    //if (user.username == null) {
+      //return;
+    //} else 
+    if(user && user.username !== null) {
       io.emit('message', `${user.username} has left the chat`);
+
       io.emit('allUsers', {
         users: getUsers()
       });
     }
-
-    
-    
   })
 
 
