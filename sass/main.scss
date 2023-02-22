@@ -116,32 +116,6 @@ button[type="submit"] {
     float: right;
 }*/
 
-
-
-.chat-messages {
-    width: 40%;
-    padding: 0.75em;
-    background-color: #fff;
-    margin: 0.5em;
-    float: left;
-    clear: both;
-}
-
-.other-messages {
-    background-color: #1EBDED;
-    float: right;
-}
-
-.chat-messages h2 {
-    font-weight: 600;
-    margin-bottom: 0.5em;
-    color: #04ADED;
-}
-
-.other-messages h2 {
-    color: #fff;
-}
-
 .content {
     display: flex;
     height: 80vh;
@@ -158,9 +132,23 @@ button[type="submit"] {
     width: 70%;
 }
 
+.user-header {
+    display: flex;
+    margin: 1.5em;
+}
+
+.fa-users {
+    font-size: 2em;
+    align-self: center;
+}
+
 form {
     display: flex;
     padding: 1em;
+}
+
+.loginForm {
+    flex-direction: column;
 }
 
 input[type="text"] {
@@ -185,5 +173,14 @@ ul li {
 }
 
 .users {
-    margin: 1em;
+    font-weight: 700;
+    font-size: 1.25em;
+    align-self: center;
+    margin-left: 0.5em;
+}
+
+#users li {
+    margin-left: 1.5em;
+    font-size: 1em;
+    font-weight: 500;
 }

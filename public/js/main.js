@@ -12,6 +12,7 @@ const username = urlParams.get('username');
 
 socket.emit('joinChat', {username});
 
+
 //utility functions for socket
 function setUserID( {sID} ) {
     //debugger;
@@ -28,6 +29,11 @@ function outputMessage(message) {
   div.innerHTML = `<p>
   ${message}</p>`;
   document.querySelector('#messages').appendChild(div);
+}
+
+function outputUsers(users) {
+  document.querySelector('#users').innerHTML = users.map(user => `<li>${user}</li>`).join('');
+  //userList.innerHTML = 
 }
 
 function showNewMessage( {message} ) {
@@ -75,10 +81,11 @@ const { createApp } = Vue;
   socket.addEventListener('typing', handleUserTyping);
 
   socket.on('message', message => {
-    outputMessage(message);
+    //outputMessage(message);
   });
 
   socket.on('allUsers', ({users}) => {
     console.log(users);
+    outputUsers(users);
   });
   

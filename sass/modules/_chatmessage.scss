@@ -1,0 +1,23 @@
+.chat-messages {
+    width: 40%;
+    padding: 0.75em;
+    background-color: #fff;
+    margin: 0.5em;
+    float: left;
+    clear: both;
+}
+
+.other-messages {
+    background-color: #1EBDED;
+    float: right;
+}
+
+.chat-messages h2 {
+    font-weight: 600;
+    margin-bottom: 0.5em;
+    color: #04ADED;
+}
+
+.other-messages h2 {
+    color: #fff;
+}
