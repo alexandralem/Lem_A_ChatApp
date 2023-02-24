@@ -1,0 +1,16 @@
+.notification {
+    z-index: 2;
+    position: absolute;
+    width: 100%;
+    bottom: 5%;
+}
+
+.notification div {
+    margin: auto;
+    background-color: #0da2ff;
+    color: #fff;
+    border-radius: 30px;
+    width: fit-content;
+    padding: 0.5em 1em;
+    font-size: 1.25em;
+}
