@@ -26,9 +26,13 @@ function handleUserTyping(user) {
 
 function outputMessage(message) {
   const div = document.createElement('div');
-  div.innerHTML = `<p>
-  ${message}</p>`;
+  div.classList.add('notification');
+  div.innerHTML = `<div><p>
+  ${message}</p></div>`;
   document.querySelector('#messages').appendChild(div);
+  setTimeout(() => {
+    div.style.visibility = "hidden";
+  }, 3000);
 }
 
 function outputUsers(users) {
@@ -81,7 +85,7 @@ const { createApp } = Vue;
   socket.addEventListener('typing', handleUserTyping);
 
   socket.on('message', message => {
-    //outputMessage(message);
+    outputMessage(message);
   });
 
   socket.on('allUsers', ({users}) => {
